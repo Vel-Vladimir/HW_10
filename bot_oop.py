@@ -4,11 +4,17 @@ from collections import UserDict
 class Phone:
     def __init__(self, phone_number: str):
         self.value = phone_number
-    
+
+    def __str__(self):
+        return self.value
+
 
 class Name:
     def __init__(self, name: str):
         self.value = name
+
+    def __str__(self):
+        return self.value
 
 
 class Record:
@@ -16,28 +22,27 @@ class Record:
         self.phones = list(set(phones))
         self.name = name
 
-    def add_phone(self, phone_to_add: Phone) -> None:
-        is_exist = False
+    def __str__(self):
+        return f'Record({self.name}, {[ph.value for ph in self.phones]})'
+
+    def add_phone(self, phone_to_add: Phone):
         for exist_phone in self.phones:
             if phone_to_add.value == exist_phone.value:
-                is_exist = True
-        if not is_exist:
-            self.phones.append(phone_to_add)
+                return f"You try to add phone {phone_to_add} that already exists"
+        self.phones.append(phone_to_add)
 
-
-    def del_phone(self, phone: Phone) -> None:
+    def del_phone(self, phone: Phone):
         try:
             self.phones.remove(phone)
-
         except ValueError:
-            message = f"You try to delete number {phone.value} that is absent in the list!"
+            return f"You try to delete number {phone} that is absent in the list!"
 
-    def edit_phone(self, current_phone: Phone, new_phone: Phone) -> None:
+    def edit_phone(self, current_phone: Phone, new_phone: Phone):
         try:
             index = self.phones.index(current_phone)
             self.phones[index] = new_phone
         except ValueError:
-            message = f"You try to edit number {current_phone.value} that is absent in the list!"
+            return f"You try to edit number {current_phone} that is absent in the list!"
 
 
 class AddressBook(UserDict):
