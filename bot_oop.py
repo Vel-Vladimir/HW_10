@@ -5,7 +5,7 @@ class Phone:
     def __init__(self, phone_number: str):
         self.value = phone_number
 
-    def __str__(self):
+    def __repr__(self):
         return self.value
 
 
@@ -13,7 +13,7 @@ class Name:
     def __init__(self, name: str):
         self.value = name
 
-    def __str__(self):
+    def __repr__(self):
         return self.value
 
 
@@ -22,7 +22,7 @@ class Record:
         self.phones = list(set(phones))
         self.name = name
 
-    def __str__(self):
+    def __repr__(self):
         return f'Record({self.name}, {[ph.value for ph in self.phones]})'
 
     def add_phone(self, phone_to_add: Phone):
